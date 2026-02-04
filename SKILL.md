@@ -37,9 +37,11 @@ Only `pyyaml` and `rendercv[full]` are required.
 
 ## Language
 
-Use Australian English spelling throughout the tailored CV (e.g., "colour"
-not "color", "centre" not "center", "organisation" not "organization",
-"optimise" not "optimize").
+Match the spelling conventions used in the source CV. If the source CV uses
+British/Australian English (e.g., "colour", "organisation", "optimise"),
+keep that throughout. If it uses American English (e.g., "color",
+"organization", "optimize"), keep that instead. When unclear, default to
+the conventions of the country where the job is located.
 
 ## Workflow
 
@@ -93,21 +95,21 @@ Extract the following from the job ad:
 
 - **essential_requirements** - Must-have skills/qualifications
 - **preferred_requirements** - Nice-to-have skills/qualifications
-- **key_technologies** - Specific technologies, tools, frameworks mentioned
+- **key_skills_and_tools** - Specific skills, tools, methods, or technologies mentioned
 - **soft_skills** - Soft skills and personal qualities mentioned
 - **role_focus** - Main responsibilities and focus areas
 - **industry_domain** - The industry or business domain
 - **company_culture** - Cultural aspects or values mentioned
 - **experience_level** - Required years of experience
 - **certifications_required** - Any certifications or professional qualifications mentioned
-- **technical_expertise** - Technical skills and expertise areas mentioned
+- **domain_expertise** - Specialist knowledge areas mentioned
 - **professional_qualifications** - Professional qualifications, licenses, or credentials mentioned
 
 Pay special attention to:
-- Any mention of "technical and professional expertise"
+- Specific expertise or domain knowledge requirements
 - Certification requirements or preferences
 - Professional qualifications or licenses
-- Partner enablement or training requirements
+- Industry-specific terminology or standards
 
 ### Step 2: Reorder and Filter Sections
 
@@ -126,7 +128,7 @@ These two sections must be done **simultaneously** to ensure perfect alignment.
 #### Skills Section:
 - **Reorder skills** to put the most job-relevant ones first
 - **Group related skills** together for better readability
-- **Emphasise key technologies** mentioned in the job requirements
+- **Emphasise key skills and tools** mentioned in the job requirements
 - **Keep all existing skills** but prioritise the most relevant ones
 - **Maintain the original skill categories/structure** if they exist
 
@@ -138,18 +140,18 @@ These two sections must be done **simultaneously** to ensure perfect alignment.
 - **CRITICAL**: Only mention skills that appear in the tailored skills section
 
 #### Alignment Rules (CRITICAL):
-- **Perfect sync**: Every technical skill mentioned in the summary MUST appear prominently in the tailored skills section
+- **Perfect sync**: Every specific skill mentioned in the summary MUST appear prominently in the tailored skills section
 - **Priority matching**: Skills mentioned in summary should be in the top tier of the tailored skills section
 - **No hallucination**: Never mention skills not present in the original skills list
 - **Consistency**: Use the same terminology for skills in both sections
-- **Validation**: Before finalising, cross-check every technical term in summary against skills list
+- **Validation**: Before finalising, cross-check every skill claim in summary against skills list
 - **Zero tolerance**: If a skill is mentioned in summary, it MUST be findable in the skills section
 
 #### Summary Style Rules:
-- AVOID generic phrases like "Technical professional", "Experienced professional", "Skilled professional"
+- AVOID generic phrases like "Experienced professional", "Skilled professional", "Dedicated worker"
 - Use specific, varied language that reflects the candidate's actual background
-- NEVER use vague headers like "Technical Professional." Use the exact role title from the job ad, or substitute "[industry] professional," e.g., "Data Professional"
-- If mentioning education, always highlight the most recent and highest degree (e.g., MS over BS)
+- Use the exact role title from the job ad when possible, or a relevant industry-specific title
+- If mentioning education, always highlight the most recent and highest qualification
 
 ### Step 4: Tailor Experience
 
@@ -164,18 +166,10 @@ These two sections must be done **simultaneously** to ensure perfect alignment.
 - Quantify results where possible
 - Focus on impact and outcomes
 
-#### Role-Specific Guidelines:
-- **Technical roles**: Emphasise technical skills, projects, and problem-solving
-- **Management roles**: Emphasise leadership, team management, and strategic thinking
-- **Service roles**: Emphasise customer service, communication, and problem resolution
-- **Creative roles**: Emphasise creativity, innovation, and project outcomes
-
 #### Content Restrictions:
-- DO NOT ADD technical skills to non-technical roles unless they were actually used
-- DO NOT ADD data engineering, SQL, Python, or machine learning content to hardware/testing roles
-- DO NOT ADD software development claims to service/retail roles
-- Hardware/testing roles should focus on testing, quality assurance, and production support
-- Service roles should focus on customer service, communication, and operational tasks
+- DO NOT ADD skills or responsibilities to a role unless they were actually performed
+- Each role should reflect what the candidate genuinely did -- not what the target job wants to hear
+- Emphasise the aspects of each role that are most relevant to the target job, but do not fabricate
 
 #### Critical Rules:
 - Base everything on the candidate's ACTUAL experience
@@ -192,27 +186,19 @@ These two sections must be done **simultaneously** to ensure perfect alignment.
 - Remove projects that don't align with the role requirements
 
 #### Content Optimisation:
-- Emphasise technologies and skills relevant to the job
+- Emphasise skills, methods, and outcomes relevant to the job
 - Highlight quantifiable results and impact
-- Focus on problem-solving and technical implementation
+- Focus on problem-solving and implementation
 - Keep descriptions concise and impactful
 
-#### Technology Accuracy:
-- Only mention technologies that were actually used in the project
-- Do NOT add technologies that weren't part of the original project
-- If original project used only SQL, do NOT add Python, pandas, or other technologies
-- Example: If original says "using SQL", do NOT change to "using SQL, Python, and pandas"
-
-#### Project Type Guidelines:
-- **Technical projects**: Emphasise technical skills, algorithms, and problem-solving
-- **Data projects**: Emphasise data analysis, visualisation, and insights
-- **Web projects**: Emphasise full-stack development, user experience, and deployment
-- **Research projects**: Emphasise methodology, analysis, and findings
+#### Accuracy:
+- Only mention tools, methods, or skills that were actually used in the project
+- Do NOT add skills or tools that weren't part of the original project
 
 #### Critical Rules:
 - Base everything on the candidate's ACTUAL projects
-- Do NOT invent new projects or technologies
-- Maintain factual accuracy about what was actually built
+- Do NOT invent new projects or capabilities
+- Maintain factual accuracy about what was actually done
 - Keep project links and names intact
 
 ### Step 6: Tailor Education
@@ -230,10 +216,8 @@ These two sections must be done **simultaneously** to ensure perfect alignment.
 - Keep thesis/capstone project descriptions intact
 
 #### Relevance Guidelines:
-- **Technical roles**: Emphasise technical coursework, programming, algorithms
-- **Business roles**: Emphasise business, management, and analytical courses
-- **Creative roles**: Emphasise design, communication, and creative courses
-- **Research roles**: Emphasise research methodology, analysis, and specialised courses
+- Prioritise coursework and achievements that align with the target role's requirements
+- Emphasise any specialisations, honours, or research relevant to the job
 
 #### Critical Rules:
 - Do NOT invent courses or institutions
@@ -292,16 +276,16 @@ If none are relevant, remove the section entirely.
 
 These rules apply across ALL tailoring steps:
 
-1. **ONLY mention programming languages, tools, or technologies that are EXPLICITLY listed in the source CV**
-2. **NEVER mention skills like Java, C#, .NET, Angular, React, etc. unless they are actually in the original skills list**
+1. **ONLY mention skills, tools, or qualifications that are EXPLICITLY present in the source CV**
+2. **NEVER add skills the candidate doesn't have** -- no matter how relevant they are to the job
 3. **If the job requires skills the candidate doesn't have, focus on transferable skills they DO have**
-4. **Cross-reference every technical skill against the source CV's skills section**
+4. **Cross-reference every skill claim against the source CV**
 5. **When in doubt about a skill, omit it rather than risk hallucination**
 6. **Focus on the candidate's genuine strengths rather than trying to match every job requirement**
 7. **NEVER invent work experience, projects, education, or certifications**
 8. **Do not inflate responsibilities or achievements beyond what the source CV states**
-9. **Technology accuracy**: If a project used SQL, do not add Python/pandas. If a role was hardware testing, do not add software development
-10. **FINAL CHECK**: Before writing the tailored YAML, verify every technical term exists in the source CV
+9. **Do not add skills or tools to a role/project that weren't originally listed there**
+10. **FINAL CHECK**: Before writing the tailored YAML, verify every claim traces back to the source CV
 
 ---
 
