@@ -23,25 +23,38 @@ An OpenClaw skill for AI-powered resume tailoring. The agent's own LLM handles a
 
 ## Installation
 
-### From ClawhHub
+### 1. Clone the repo into your OpenClaw skills directory
 
 ```bash
-clawhub install cv-claw
+git clone https://github.com/nigelnuique/cv_claw.git ~/.openclaw/workspace/skills/cv-claw
 ```
 
-### Manual
-
-Copy to your OpenClaw workspace:
+Or if you prefer to clone elsewhere and copy:
 
 ```bash
-cp -r . ~/.openclaw/workspace/skills/cv-claw/
+git clone https://github.com/nigelnuique/cv_claw.git
+cp -r cv_claw/ ~/.openclaw/workspace/skills/cv-claw/
 ```
 
-### Dependencies
+On Windows, the workspace is typically at `%USERPROFILE%\.openclaw\workspace\skills\cv-claw\`.
+
+### 2. Install dependencies
 
 ```bash
 pip install pyyaml "rendercv[full]"
 ```
+
+### 3. Add your CV (optional)
+
+Place your CV file in the skill directory as `master_CV.yaml`, or provide it in any format when you use the skill. See `master_CV_template.yaml` for the RenderCV YAML structure.
+
+### 4. Verify
+
+```bash
+python ~/.openclaw/workspace/skills/cv-claw/render.py validate master_CV_template.yaml
+```
+
+If you see `{"valid": true, ...}`, you're good to go. OpenClaw will pick up the skill in your next session.
 
 ## Files
 
