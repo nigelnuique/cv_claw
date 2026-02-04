@@ -4,8 +4,8 @@ An [OpenClaw](https://github.com/user/openclaw) skill for AI-powered resume tail
 
 ## How It Works
 
-1. You provide a job advertisement
-2. The agent reads your master CV (`master_CV.yaml`)
+1. You provide your CV (any format) and a job advertisement
+2. The agent converts your CV to RenderCV YAML (if not already)
 3. Following the rules in `SKILL.md`, the agent tailors each section:
    - Parses job requirements
    - Reorders/filters sections by relevance
@@ -13,6 +13,13 @@ An [OpenClaw](https://github.com/user/openclaw) skill for AI-powered resume tail
    - Tailors experience, projects, education, certifications, extracurricular
 4. Writes a new `tailored_CV.yaml`
 5. Validates and optionally renders to PDF
+
+## Accepted CV Formats
+
+- RenderCV YAML (used directly)
+- PDF, Word (.docx), plain text, Markdown
+- Pasted text in chat
+- Any structured format (JSON, other YAML)
 
 ## Installation
 
@@ -22,12 +29,6 @@ Copy to your OpenClaw workspace:
 
 ```bash
 cp -r . ~/.openclaw/workspace/skills/cv-claw/
-```
-
-Then copy `master_CV_template.yaml` to `master_CV.yaml` and fill in your details:
-
-```bash
-cp master_CV_template.yaml master_CV.yaml
 ```
 
 ### Dependencies
@@ -44,8 +45,7 @@ That's it. Two packages.
 |------|---------|
 | `SKILL.md` | Complete tailoring workflow and rules for the agent |
 | `render.py` | YAML validation + PDF rendering utility |
-| `master_CV.yaml` | Your master CV (source of truth, gitignored) |
-| `master_CV_template.yaml` | Template for creating your master CV |
+| `master_CV_template.yaml` | Reference template for RenderCV YAML format |
 | `markdown/` | RenderCV Jinja2 templates (11 files) |
 
 ## Usage
@@ -86,10 +86,10 @@ Both commands output JSON:
 
 The skill enforces strict anti-hallucination rules:
 
-- Only mention skills/technologies that exist in the master CV
+- Only mention skills/technologies that exist in the source CV
 - Never invent work experience, projects, or certifications
 - Technology accuracy: if a project used SQL, don't add Python/pandas
-- Cross-reference every technical term against the master CV
+- Cross-reference every technical term against the source CV
 - When in doubt, omit rather than risk hallucination
 
 See `SKILL.md` for the complete set of rules.

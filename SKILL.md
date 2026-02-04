@@ -1,19 +1,33 @@
 # CV Claw - Resume Tailoring
 
-Tailor the user's master CV to a specific job advertisement. Read YAML,
-modify sections to match job requirements, write tailored YAML, validate,
-and optionally render to PDF.
+Tailor a CV to a specific job advertisement. Accepts any CV format as
+input, converts to RenderCV YAML, tailors each section, validates, and
+optionally renders to PDF.
 
 ## When to Use
 
 - User asks to tailor/customise their resume for a job
 - User pastes a job ad and wants their CV updated
 - User asks to optimise their resume for a specific role
+- User wants to convert their CV to a clean PDF
+
+## Accepted CV Inputs
+
+The user can provide their CV in **any** of these ways:
+
+- **RenderCV YAML file** (e.g. `master_CV.yaml`) -- used directly
+- **Any YAML/JSON file** -- converted to RenderCV format
+- **PDF file** -- read and converted to RenderCV YAML
+- **Word document** (.docx) -- read and converted to RenderCV YAML
+- **Plain text / Markdown** -- pasted into chat or provided as a file
+- **No CV provided** -- ask the user for their CV before proceeding
+
+If a `master_CV.yaml` exists in this skill's directory, use it as the
+default when the user doesn't specify a CV file.
 
 ## Files
 
-- `master_CV.yaml` - User's master CV (source of truth, **never modify**)
-- `master_CV_template.yaml` - Reference template for YAML format
+- `master_CV_template.yaml` - Reference template for RenderCV YAML format
 - `render.py` - Validation and PDF rendering utility
 - `markdown/` - RenderCV Jinja2 templates (11 files)
 
@@ -29,9 +43,9 @@ not "color", "centre" not "center", "organisation" not "organization",
 
 ## Workflow
 
-1. **Read** `master_CV.yaml` (never modify this file)
+1. **Ingest** the user's CV (any format -- see Step 0 below)
 2. **Analyse** the job advertisement the user provides
-3. **Tailor** each section following the steps below
+3. **Tailor** each section following Steps 1-7 below
 4. **Write** the tailored CV to a new YAML file (e.g. `tailored_CV.yaml`)
 5. **Validate**: `python render.py validate tailored_CV.yaml`
 6. **Render** (if user wants PDF): `python render.py render tailored_CV.yaml`
@@ -39,6 +53,39 @@ not "color", "centre" not "center", "organisation" not "organization",
 ---
 
 ## Step-by-Step Tailoring Process
+
+### Step 0: Ingest the CV
+
+Convert the user's CV into RenderCV YAML format. Use `master_CV_template.yaml`
+as the structural reference.
+
+#### If the CV is already RenderCV YAML:
+- Read it directly. No conversion needed.
+
+#### If the CV is any other format (PDF, Word, plain text, pasted text, JSON, etc.):
+1. Read/extract all content from the source
+2. Map it to the RenderCV YAML structure (see YAML Format Reference below)
+3. Preserve **all** information -- do not drop any content during conversion
+4. Write the converted CV to a YAML file (e.g. `source_CV.yaml`)
+5. Run `python render.py validate source_CV.yaml` to confirm the structure is correct
+
+#### Mapping rules:
+- **Name, contact info, links** go under `cv:` top-level fields
+- **Summary/objective/profile** goes into `sections.professional_summary` (as a list with one string)
+- **Work history** goes into `sections.experience` (each role is a dict with company, position, start_date, end_date, location, highlights)
+- **Projects/portfolio** goes into `sections.projects`
+- **Education** goes into `sections.education` (institution, degree, area, dates, highlights)
+- **Skills** goes into `sections.skills` (each category is a dict with label + details string)
+- **Certifications/licenses** goes into `sections.certifications` (list of strings)
+- **Activities/volunteering** goes into `sections.extracurricular` (each is a dict with label + details)
+- Any section that doesn't fit the above can be added as a custom section name
+
+#### Important:
+- This step is about **faithful conversion**, not tailoring. Keep everything.
+- The tailoring happens in Steps 1-7.
+- The converted YAML becomes the source of truth for the rest of the workflow.
+  **Never modify** the source file after this point -- all tailoring writes to
+  a new file.
 
 ### Step 1: Parse the Job Advertisement
 
@@ -216,7 +263,7 @@ that share the same job requirements context.
 4. General certifications that show professional development
 
 **Critical Rules:**
-- Use ONLY the actual certifications from the master CV
+- Use ONLY the actual certifications from the source CV
 - DO NOT create, invent, or generate new certification names
 - If no certifications are relevant, remove the section entirely
 
@@ -245,16 +292,16 @@ If none are relevant, remove the section entirely.
 
 These rules apply across ALL tailoring steps:
 
-1. **ONLY mention programming languages, tools, or technologies that are EXPLICITLY listed in the master CV**
+1. **ONLY mention programming languages, tools, or technologies that are EXPLICITLY listed in the source CV**
 2. **NEVER mention skills like Java, C#, .NET, Angular, React, etc. unless they are actually in the original skills list**
 3. **If the job requires skills the candidate doesn't have, focus on transferable skills they DO have**
-4. **Cross-reference every technical skill against the master CV's skills section**
+4. **Cross-reference every technical skill against the source CV's skills section**
 5. **When in doubt about a skill, omit it rather than risk hallucination**
 6. **Focus on the candidate's genuine strengths rather than trying to match every job requirement**
 7. **NEVER invent work experience, projects, education, or certifications**
-8. **Do not inflate responsibilities or achievements beyond what the master CV states**
+8. **Do not inflate responsibilities or achievements beyond what the source CV states**
 9. **Technology accuracy**: If a project used SQL, do not add Python/pandas. If a role was hardware testing, do not add software development
-10. **FINAL CHECK**: Before writing the tailored YAML, verify every technical term exists in the master CV
+10. **FINAL CHECK**: Before writing the tailored YAML, verify every technical term exists in the source CV
 
 ---
 
