@@ -81,6 +81,10 @@ Both commands output JSON:
 
 `SKILL.md` contains all tailoring logic as structured instructions. The agent's own LLM does the reasoning. Python (`render.py`) only handles validation and PDF rendering. No external API keys required.
 
+## Security
+
+`render.py` makes **no network calls**. It only reads and writes local YAML files and shells out to `rendercv` for PDF generation. You can audit the entire script -- it's a single file under 350 lines.
+
 ## Anti-Hallucination Rules
 
 The skill enforces strict anti-hallucination rules:
