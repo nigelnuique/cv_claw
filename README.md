@@ -1,6 +1,6 @@
 # CV Claw
 
-An [OpenClaw](https://github.com/user/openclaw) skill for AI-powered resume tailoring. The agent's own LLM handles all tailoring logic -- no separate API calls needed.
+An OpenClaw skill for AI-powered resume tailoring. The agent's own LLM handles all tailoring logic -- no separate API calls needed.
 
 ## How It Works
 
@@ -23,7 +23,13 @@ An [OpenClaw](https://github.com/user/openclaw) skill for AI-powered resume tail
 
 ## Installation
 
-### As an OpenClaw skill
+### From ClawhHub
+
+```bash
+clawhub install cv-claw
+```
+
+### Manual
 
 Copy to your OpenClaw workspace:
 
@@ -37,8 +43,6 @@ cp -r . ~/.openclaw/workspace/skills/cv-claw/
 pip install pyyaml "rendercv[full]"
 ```
 
-That's it. Two packages.
-
 ## Files
 
 | File | Purpose |
@@ -50,9 +54,7 @@ That's it. Two packages.
 
 ## Usage
 
-### With an OpenClaw agent
-
-Just ask:
+Just ask your agent:
 
 > "Tailor my resume for this job: [paste job ad]"
 
@@ -71,25 +73,22 @@ python render.py render tailored_CV.yaml --output-dir output
 Both commands output JSON:
 
 ```json
-// validate
 {"valid": true, "errors": [], "warnings": []}
-
-// render
 {"success": true, "pdf": "output/tailored_CV.pdf", "error": null}
 ```
 
 ## Architecture
 
-`SKILL.md` contains all tailoring logic as structured instructions. The agent's own LLM does the reasoning. Python (`render.py`) only handles validation and PDF rendering.
+`SKILL.md` contains all tailoring logic as structured instructions. The agent's own LLM does the reasoning. Python (`render.py`) only handles validation and PDF rendering. No external API keys required.
 
 ## Anti-Hallucination Rules
 
 The skill enforces strict anti-hallucination rules:
 
-- Only mention skills/technologies that exist in the source CV
+- Only mention skills that exist in the source CV
 - Never invent work experience, projects, or certifications
-- Technology accuracy: if a project used SQL, don't add Python/pandas
-- Cross-reference every technical term against the source CV
+- Do not add skills or tools to a role that weren't originally there
+- Cross-reference every claim against the source CV
 - When in doubt, omit rather than risk hallucination
 
 See `SKILL.md` for the complete set of rules.
@@ -97,3 +96,7 @@ See `SKILL.md` for the complete set of rules.
 ## YAML Format
 
 The CV uses [RenderCV](https://github.com/sinaatalay/rendercv) YAML format. See `master_CV_template.yaml` for the full structure reference.
+
+## License
+
+MIT

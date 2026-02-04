@@ -1,3 +1,22 @@
+---
+name: cv-claw
+description: Tailor a CV to any job ad. Accepts any CV format, converts to RenderCV YAML, tailors each section with anti-hallucination rules, validates, and renders to PDF.
+license: MIT
+metadata:
+  author: nigelnuique
+  version: "1.0.0"
+  openclaw:
+    emoji: "📄"
+    bins:
+      - python
+    install:
+      pip: "pyyaml rendercv[full]"
+    os:
+      - darwin
+      - linux
+      - win32
+---
+
 # CV Claw - Resume Tailoring
 
 Tailor a CV to a specific job advertisement. Accepts any CV format as
