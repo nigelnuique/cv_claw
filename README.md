@@ -4,7 +4,7 @@ An OpenClaw skill for AI-powered resume tailoring. The agent's own LLM handles a
 
 ## How It Works
 
-1. You provide your CV (any format) and a job advertisement
+1. You provide your CV (any format) and a job advertisement (pasted, as a file, as a URL, or found by the agent)
 2. The agent converts your CV to RenderCV YAML (if not already)
 3. Following the rules in `SKILL.md`, the agent tailors each section:
    - Parses job requirements
@@ -58,7 +58,9 @@ Just ask your agent:
 
 > "Tailor my resume for this job: [paste job ad]"
 
-The agent reads `SKILL.md`, follows the workflow, and produces a tailored CV.
+> "Tailor my CV for this role: [URL]"
+
+The agent can also find job ads itself -- from URLs, files, or earlier context in the conversation. It reads `SKILL.md`, follows the workflow, and produces a tailored CV.
 
 ### Manual validation and rendering
 
