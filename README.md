@@ -80,11 +80,7 @@ Both commands output JSON:
 
 ## Architecture
 
-**Previous architecture** (removed): Python LangGraph nodes calling OpenAI API directly (9 nodes, each with its own GPT call). Required `openai`, `langgraph`, `langsmith`, `flask`, `spacy`, `scikit-learn`, and many other dependencies.
-
-**Current architecture**: `SKILL.md` contains all tailoring logic as structured instructions. The agent's own LLM does the reasoning. Python (`render.py`) only handles validation and PDF rendering.
-
-This reduces dependencies from ~15 packages to 2 (`pyyaml` + `rendercv`).
+`SKILL.md` contains all tailoring logic as structured instructions. The agent's own LLM does the reasoning. Python (`render.py`) only handles validation and PDF rendering.
 
 ## Anti-Hallucination Rules
 
