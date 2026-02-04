@@ -7,7 +7,8 @@ optionally renders to PDF.
 ## When to Use
 
 - User asks to tailor/customise their resume for a job
-- User pastes a job ad and wants their CV updated
+- User pastes or references a job ad and wants their CV updated
+- Agent finds a job listing (e.g. via web search or file) and needs to tailor a CV to it
 - User asks to optimise their resume for a specific role
 - User wants to convert their CV to a clean PDF
 
@@ -43,10 +44,21 @@ keep that throughout. If it uses American English (e.g., "color",
 "organization", "optimize"), keep that instead. When unclear, default to
 the conventions of the country where the job is located.
 
+## Job Advertisement Input
+
+The job ad can come from anywhere:
+
+- **Pasted by the user** in chat
+- **A file** (text, PDF, Word, HTML) provided by the user or found by the agent
+- **A URL** the agent fetches
+- **Already in context** from an earlier part of the conversation
+
+If the job ad hasn't been provided yet, ask for it or fetch it before proceeding.
+
 ## Workflow
 
-1. **Ingest** the user's CV (any format -- see Step 0 below)
-2. **Analyse** the job advertisement the user provides
+1. **Ingest** the CV (any format -- see Step 0 below)
+2. **Obtain** the job advertisement (from user, file, URL, or context)
 3. **Tailor** each section following Steps 1-7 below
 4. **Write** the tailored CV to a new YAML file (e.g. `tailored_CV.yaml`)
 5. **Validate**: `python render.py validate tailored_CV.yaml`
